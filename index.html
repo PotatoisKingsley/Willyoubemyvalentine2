@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Valentine 💖</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <style>
     body {
       margin: 0;
@@ -24,7 +23,7 @@
       box-shadow: 0 20px 40px rgba(0,0,0,0.15);
       max-width: 320px;
       width: 90%;
-      animation: fadeIn 1s ease;
+      animation: fadeIn 0.5s ease;
     }
 
     img {
@@ -55,6 +54,8 @@
     #yes {
       background: #ff4d6d;
       color: white;
+      font-size: 18px;
+      padding: 16px 40px;
     }
 
     #no {
@@ -65,20 +66,9 @@
       transform: scale(1.05);
     }
 
-    .big-yes {
-      font-size: 22px;
-      padding: 18px 45px;
-    }
-
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -87,20 +77,37 @@
 <div class="card" id="content">
   <img src="Jump Bear GIF - Jump Bear Cute - Discover & Share GIFs.gif" alt="Bear with roses">
   <h1>Will you be my Valentine? 💖</h1>
-
   <button id="yes" onclick="yesClicked()">Yes 💕</button>
   <button id="no" onclick="noClicked()">No 🙃</button>
 </div>
 
 <script>
-  function noClicked() {
-    document.getElementById("content").innerHTML = `
-  <img src="Jump Bear GIF - Jump Bear Cute - Discover & Share GIFs.gif" alt="Bear with roses">
-  <h1>Will you be my Valentine? 💖</h1>
+  const noMessages = [
+    "Are you sure?",
+    "Really?",
+    "Just think about it",
+    "If you say so, I will be very sad :(",
+    "I will be very sad :(",
+    "Very very very very sad :(",
+    "Fine, I'll stop asking",
+    "Just kidding, PLEASE SAY YES",
+    "Fine, I'll take Dino and Sour with me then"
+  ];
 
-  <button id="yes" onclick="yesClicked()">Yes 💕</button>
-  <button id="no" onclick="noClicked()">Are you sure, I will be very very very sad 🙃</button>
-    `;
+  let noIndex = 0;
+
+  function noClicked() {
+    if (noIndex < noMessages.length) {
+      const message = noMessages[noIndex];
+      document.getElementById("content").innerHTML = `
+        <img src="Jump Bear GIF - Jump Bear Cute - Discover & Share GIFs.gif" alt="Bear with roses">
+        <h1>Will you be my Valentine? 💖</h1>
+        <button id="yes" onclick="yesClicked()">Yes 💕</button>
+        <p style="font-size:14px; color:#666;">${message}</p>
+        <button id="no" onclick="noClicked()">No 🙃</button>
+      `;
+      noIndex++;
+    }
   }
 
   function yesClicked() {
